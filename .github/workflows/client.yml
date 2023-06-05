@@ -11,10 +11,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-        working-directory: ./my-agora-states-client-react
+        working-directory: ./my-agora-states-client
       - name: Build
         run: npm run build
-        working-directory: ./my-agora-states-client-react
+        working-directory: ./my-agora-states-client
       - name: SHOW AWS CLI VERSION
         run: |
           aws --version
@@ -24,7 +24,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
-            aws s3 sync build s3://fe-60-scarlett0js-s3 \
+            aws s3 sync \
             --region ap-northeast-2 \
+            build s3://fe-60-scarlett0js-s3 \
             --delete
-        working-directory: ./my-agora-states-client-react
+        working-directory: ./my-agora-states-client
